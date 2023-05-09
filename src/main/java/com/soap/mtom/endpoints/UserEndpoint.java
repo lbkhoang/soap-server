@@ -40,7 +40,7 @@ public class UserEndpoint {
     public GetUserResponse getUserUpload(@RequestPayload GetUserUploadRequest request) {
 
         // Note preferred way of declaring an array variable
-        try (OutputStream stream = new FileOutputStream("D:\\A_IMG\\abc.jpeg")) {
+        try (OutputStream stream = new FileOutputStream("/home/site/wwwroot/upload.jpeg")) {
             stream.write(request.getFileUpload());
         } catch (IOException e) {
             e.printStackTrace();

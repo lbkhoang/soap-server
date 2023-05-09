@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class UserRepository {
 
-    private static final String PROFILE_PICTURE_PATH = "D:\\A_IMG\\";
+    private static final String PROFILE_PICTURE_PATH = "/home/site/wwwroot/";
     private static final Map<Integer, User> USER_MAP = new HashMap<>();
 
     @PostConstruct
