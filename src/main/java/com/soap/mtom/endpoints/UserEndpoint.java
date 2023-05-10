@@ -12,7 +12,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.imageio.ImageIO;
 import java.io.*;
 
 @Endpoint
@@ -40,9 +39,9 @@ public class UserEndpoint {
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserUploadRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserUploadResponseResponse")
     @ResponsePayload
-    public GetUserResponse getUserUpload(@RequestPayload GetUserUploadRequest request) throws FileNotFoundException {
+    public GetUserUploadResponse getUserUpload(@RequestPayload GetUserUploadRequest request) throws FileNotFoundException {
         String fileName = request.getFileUpload().getName();
         try (OutputStream stream = new FileOutputStream(ROOT_PATH + fileName)) {
             request.getFileUpload().writeTo(stream);
@@ -50,25 +49,15 @@ public class UserEndpoint {
             e.printStackTrace();
         }
 
-        GetUserResponse response = new GetUserResponse();
+        GetUserUploadResponse response = new GetUserUploadResponse();
 
-        User user = userRepository.getUserById(request.getId());
+        DataSource source = new FileDataSource(new File(ROOT_PATH + fileName));
 
-        ProfilePicture pic = new ProfilePicture();
-        try {
-            pic.setName(user.getId() + "_" + user.getFirstname() + ".jpeg");
-            DataSource source = new FileDataSource(new File(ROOT_PATH + fileName));
-            pic.setContent(new DataHandler(source));
-            user.setProfilePicture(pic);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        response.setUser(user);
+        response.setFileUpload(new DataHandler(source));
 
         DataSource source2 = new FileDataSource(new File(ROOT_PATH + "text.txt"));
 
-        response.setFileUpload(new DataHandler(source2));
+        response.setFileTxt(new DataHandler(source2));
 
         return response;
     }
