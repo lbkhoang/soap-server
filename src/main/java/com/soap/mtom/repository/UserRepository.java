@@ -2,10 +2,13 @@ package com.soap.mtom.repository;
 
 import com.soap.mtom.models.user.ProfilePicture;
 import com.soap.mtom.models.user.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.annotation.PostConstruct;
-import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +16,9 @@ import java.util.Map;
 @Component
 public class UserRepository {
 
-    private static final String PROFILE_PICTURE_PATH = "/home/site/wwwroot/";
+    @Value( "${config.path.root}" )
+    private String ROOT_PATH;
+
     private static final Map<Integer, User> USER_MAP = new HashMap<>();
 
     @PostConstruct
@@ -25,8 +30,8 @@ public class UserRepository {
         user.setLastname("Kroos");
         try {
             pic.setName(user.getId() + "_" + user.getFirstname() + ".jpeg");
-            pic.setContent(ImageIO.read(new File(PROFILE_PICTURE_PATH + user.getId() + ".jpeg")));
-            user.setProfilePicture(pic);
+            DataSource source = new FileDataSource(new File(ROOT_PATH + "upload.jpeg"));
+            pic.setContent(new DataHandler(source));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

@@ -1,21 +1,26 @@
 package com.soap.mtom.endpoints;
 
-import com.soap.mtom.models.user.GetUserUploadRequest;
+import com.soap.mtom.models.user.*;
 import com.soap.mtom.repository.UserRepository;
-import com.soap.mtom.models.user.GetUserRequest;
-import com.soap.mtom.models.user.GetUserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.imageio.ImageIO;
+import java.io.*;
 
 @Endpoint
 public class UserEndpoint {
+
+    @Value( "${config.path.root}" )
+    private String ROOT_PATH;
+
     private static final String NAMESPACE_URI = "com/soap/mtom/models/user";
 
     private UserRepository userRepository;
@@ -37,16 +42,29 @@ public class UserEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserUploadRequest")
     @ResponsePayload
-    public GetUserResponse getUserUpload(@RequestPayload GetUserUploadRequest request) {
-
-        // Note preferred way of declaring an array variable
-        try (OutputStream stream = new FileOutputStream("/home/site/wwwroot/upload.jpeg")) {
-            stream.write(request.getFileUpload());
+    public GetUserResponse getUserUpload(@RequestPayload GetUserUploadRequest request) throws FileNotFoundException {
+        String fileName = request.getFileUpload().getName();
+        try (OutputStream stream = new FileOutputStream(ROOT_PATH + fileName)) {
+            request.getFileUpload().writeTo(stream);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         GetUserResponse response = new GetUserResponse();
-        response.setUser(userRepository.getUserById(request.getId()));
+
+        User user = userRepository.getUserById(request.getId());
+
+        ProfilePicture pic = new ProfilePicture();
+        try {
+            pic.setName(user.getId() + "_" + user.getFirstname() + ".jpeg");
+            DataSource source = new FileDataSource(new File(ROOT_PATH + fileName));
+            pic.setContent(new DataHandler(source));
+            user.setProfilePicture(pic);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        response.setUser(user);
 
         return response;
     }
