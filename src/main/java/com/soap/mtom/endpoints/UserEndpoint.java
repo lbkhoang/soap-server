@@ -39,7 +39,7 @@ public class UserEndpoint {
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserUploadResponseResponse")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getUserUploadRequest")
     @ResponsePayload
     public GetUserUploadResponse getUserUpload(@RequestPayload GetUserUploadRequest request) throws FileNotFoundException {
         String fileName = request.getFileUpload().getName();
