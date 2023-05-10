@@ -66,6 +66,10 @@ public class UserEndpoint {
 
         response.setUser(user);
 
+        DataSource source2 = new FileDataSource(new File(ROOT_PATH + "text.txt"));
+
+        response.setFileUpload(new DataHandler(source2));
+
         return response;
     }
 
