@@ -54,7 +54,25 @@ public class UserEndpoint {
         }
 
         GetUserUploadResponse response = new GetUserUploadResponse();
-        response.setFileName(fileName);
+        response.setFileName("Got file: " + fileName);
+
+        return response;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMultipleRequest")
+    @ResponsePayload
+    public RespondMultipleFiles getUserUpload2(@RequestPayload GetMultipleRequest request) throws FileNotFoundException {
+
+
+        RespondMultipleFiles response = new RespondMultipleFiles();
+        DataSource source = new FileDataSource(new File(ROOT_PATH + "audio_driver.zip"));
+        response.setFileUploadA(new DataHandler(source));
+
+        DataSource source2 = new FileDataSource(new File(ROOT_PATH + "audio_driver.zip"));
+        response.setFileUploadB(new DataHandler(source2));
+        response.setFileUploadC(new DataHandler(source));
+        response.setFileUploadD(new DataHandler(source));
+        response.setFileUploadE(new DataHandler(source));
 
         return response;
     }

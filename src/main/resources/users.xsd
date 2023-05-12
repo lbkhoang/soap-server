@@ -36,4 +36,24 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="getMultipleRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="download" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="respondMultipleFiles">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fileUploadA" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+                <xs:element name="fileUploadB" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+                <xs:element name="fileUploadC" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+                <xs:element name="fileUploadD" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+                <xs:element name="fileUploadE" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>
