@@ -7,7 +7,7 @@
     <xs:element name="getUserRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="id" type="xs:int"/>
+                <xs:element name="file" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -15,25 +15,10 @@
     <xs:element name="getUserResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="user" type="tns:user"/>
                 <xs:element name="fileUpload" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="user">
-        <xs:sequence>
-            <xs:element name="id" type="xs:int"/>
-            <xs:element name="firstname" type="xs:string"/>
-            <xs:element name="lastname" type="xs:string"/>
-            <xs:element name="profilePicture" type="tns:profilePicture"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:complexType name="profilePicture">
-        <xs:sequence>
-            <xs:element name="name" type="xs:string"/>
-            <xs:element name="content" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
-        </xs:sequence>
-    </xs:complexType>
 
     <xs:element name="getUserUploadRequest">
         <xs:complexType>
@@ -46,8 +31,7 @@
     <xs:element name="getUserUploadResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="fileUpload" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
-                <xs:element name="fileTxt" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+                <xs:element name="fileName" type="xs:string"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

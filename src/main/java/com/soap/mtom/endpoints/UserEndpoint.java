@@ -33,8 +33,11 @@ public class UserEndpoint {
     @ResponsePayload
     public GetUserResponse getUser(@RequestPayload GetUserRequest request) {
 
+        String fileName = request.getFile();
+
         GetUserResponse response = new GetUserResponse();
-        response.setUser(userRepository.getUserById(request.getId()));
+        DataSource source = new FileDataSource(new File(ROOT_PATH + fileName));
+        response.setFileUpload(new DataHandler(source));
 
         return response;
     }
@@ -43,6 +46,7 @@ public class UserEndpoint {
     @ResponsePayload
     public GetUserUploadResponse getUserUpload(@RequestPayload GetUserUploadRequest request) throws FileNotFoundException {
         String fileName = request.getFileUpload().getName();
+
         try (OutputStream stream = new FileOutputStream(ROOT_PATH + fileName)) {
             request.getFileUpload().writeTo(stream);
         } catch (IOException e) {
@@ -50,14 +54,7 @@ public class UserEndpoint {
         }
 
         GetUserUploadResponse response = new GetUserUploadResponse();
-
-        DataSource source = new FileDataSource(new File(ROOT_PATH + fileName));
-
-        response.setFileUpload(new DataHandler(source));
-
-        DataSource source2 = new FileDataSource(new File(ROOT_PATH + "text.txt"));
-
-        response.setFileTxt(new DataHandler(source2));
+        response.setFileName(fileName);
 
         return response;
     }
