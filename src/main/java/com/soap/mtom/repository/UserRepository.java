@@ -1,17 +1,7 @@
 package com.soap.mtom.repository;
 
-import com.soap.mtom.models.user.ProfilePicture;
-import com.soap.mtom.models.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.annotation.PostConstruct;
-import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 public class UserRepository {
