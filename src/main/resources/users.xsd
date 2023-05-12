@@ -1,9 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:tns="com/soap/mtom/models/user"
-           targetNamespace="com/soap/mtom/models/user"
            xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
+           targetNamespace="com/soap/mtom/models/user"
            elementFormDefault="qualified">
-
     <xs:element name="getUserRequest">
         <xs:complexType>
             <xs:sequence>
@@ -47,11 +45,11 @@
     <xs:element name="respondMultipleFiles">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="fileUploadA" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
-                <xs:element name="fileUploadB" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
-                <xs:element name="fileUploadC" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
-                <xs:element name="fileUploadD" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
-                <xs:element name="fileUploadE" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream, application/zip"/>
+                <xs:element name="fileUploadA" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xs:element name="fileUploadB" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xs:element name="fileUploadC" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xs:element name="fileUploadD" type="xs:base64Binary" xmime:expectedContentTypes="application/pdf"/>
+                <xs:element name="fileUploadE" type="xs:base64Binary" xmime:expectedContentTypes="image/jpeg, application/octet-stream"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

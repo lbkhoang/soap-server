@@ -65,14 +65,25 @@ public class UserEndpoint {
 
 
         RespondMultipleFiles response = new RespondMultipleFiles();
-        DataSource source = new FileDataSource(new File(ROOT_PATH + "audio_driver.zip"));
-        response.setFileUploadA(new DataHandler(source));
+        // file 1
+        DataSource source1 = new FileDataSource(new File(ROOT_PATH + "book+image.rar"));
+        response.setFileUploadA(new DataHandler(source1));
 
-        DataSource source2 = new FileDataSource(new File(ROOT_PATH + "audio_driver.zip"));
+        // file 2
+        DataSource source2 = new FileDataSource(new File(ROOT_PATH + "book.rar"));
         response.setFileUploadB(new DataHandler(source2));
-        response.setFileUploadC(new DataHandler(source));
-        response.setFileUploadD(new DataHandler(source));
-        response.setFileUploadE(new DataHandler(source));
+
+        // file 3
+        DataSource source3 = new FileDataSource(new File(ROOT_PATH + "image.rar"));
+        response.setFileUploadC(new DataHandler(source3));
+        // file 4
+
+        DataSource source4 = new FileDataSource(new File(ROOT_PATH + "pkpadmin.pdf"));
+        response.setFileUploadD(new DataHandler(source4));
+
+        // file 5
+        DataSource source5 = new FileDataSource(new File(ROOT_PATH + "Pizigani.jpg"));
+        response.setFileUploadE(new DataHandler(source5));
 
         return response;
     }
