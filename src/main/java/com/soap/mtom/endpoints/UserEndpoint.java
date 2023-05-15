@@ -14,6 +14,8 @@ import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import java.io.*;
 
+import static org.apache.commons.io.IOUtils.toByteArray;
+
 @Endpoint
 public class UserEndpoint {
 
@@ -61,25 +63,25 @@ public class UserEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMultipleRequest")
     @ResponsePayload
-    public RespondMultipleFiles getUserUpload2(@RequestPayload GetMultipleRequest request) throws FileNotFoundException {
-
+    public RespondMultipleFiles getUserUpload2(@RequestPayload GetMultipleRequest request) throws IOException {
 
         RespondMultipleFiles response = new RespondMultipleFiles();
+
         // file 1
         DataSource source1 = new FileDataSource(new File(ROOT_PATH + "book+image.rar"));
-        response.setFileUploadA(new DataHandler(source1));
+        response.setFileUploadA(new DataHandler(toByteArray(source1.getInputStream()), "application/zip"));
 
         // file 2
         DataSource source2 = new FileDataSource(new File(ROOT_PATH + "book.rar"));
-        response.setFileUploadB(new DataHandler(source2));
+        response.setFileUploadB(new DataHandler(toByteArray(source2.getInputStream()), "application/zip" ));
 
         // file 3
         DataSource source3 = new FileDataSource(new File(ROOT_PATH + "image.rar"));
-        response.setFileUploadC(new DataHandler(source3));
-        // file 4
+        response.setFileUploadC(new DataHandler(toByteArray(source3.getInputStream()), "application/zip"));
 
+        // file 4
         DataSource source4 = new FileDataSource(new File(ROOT_PATH + "pkpadmin.pdf"));
-        response.setFileUploadD(new DataHandler(source4));
+        response.setFileUploadD(new DataHandler(toByteArray(source4.getInputStream()), "application/pdf"));
 
         // file 5
         DataSource source5 = new FileDataSource(new File(ROOT_PATH + "Pizigani.jpg"));

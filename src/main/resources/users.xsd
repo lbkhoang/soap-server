@@ -1,57 +1,57 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
            xmlns:xmime="http://www.w3.org/2005/05/xmlmime"
            targetNamespace="com/soap/mtom/models/user"
            elementFormDefault="qualified">
-    <xs:element name="getUserRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="file" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="getUserRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="file" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xs:element name="getUserResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="fileUpload" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="getUserResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fileUpload" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xs:element name="getUserUploadRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="fileUpload" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="getUserUploadRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fileUpload" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xs:element name="getUserUploadResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="fileName" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="getUserUploadResponse">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fileName" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xs:element name="getMultipleRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="download" type="xs:string"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="getMultipleRequest">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="download" type="xsd:string"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-    <xs:element name="respondMultipleFiles">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="fileUploadA" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
-                <xs:element name="fileUploadB" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
-                <xs:element name="fileUploadC" type="xs:base64Binary" xmime:expectedContentTypes="application/zip"/>
-                <xs:element name="fileUploadD" type="xs:base64Binary" xmime:expectedContentTypes="application/pdf"/>
-                <xs:element name="fileUploadE" type="xs:base64Binary" xmime:expectedContentTypes="image/jpeg, application/octet-stream"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xsd:element name="respondMultipleFiles">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="fileUploadA" type="xsd:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xsd:element name="fileUploadB" type="xsd:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xsd:element name="fileUploadC" type="xsd:base64Binary" xmime:expectedContentTypes="application/zip"/>
+                <xsd:element name="fileUploadD" type="xsd:base64Binary" xmime:expectedContentTypes="application/pdf"/>
+                <xsd:element name="fileUploadE" type="xsd:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
 
-</xs:schema>
+</xsd:schema>
